@@ -1,0 +1,12 @@
+FROM clearlinux:base
+MAINTAINER Russel Torres (russtorres@gmail.com)
+
+ADD https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh miniconda3.sh
+RUN /bin/bash miniconda3.sh -b -p /conda && rm miniconda3.sh && echo export PATH=/conda/bin:$PATH >> .bashrc
+
+ENV PATH="/conda/bin:${PATH}"
+
+RUN swupd bundle-add git
+
+RUN conda update conda
+
